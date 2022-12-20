@@ -12,7 +12,7 @@ const BookShelf = ({ updateShelf, books, title }) => {
                 {books &&
                 books.map((book) => (
                   <li key={book.id}>
-                  <Book updateShelf={updateShelf} currentShelf={book.shelf} book={book}/>
+                  <Book updateShelf={updateShelf} book={book}/>
                   </li>
                   ))}  
                 </ol>

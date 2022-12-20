@@ -9,21 +9,24 @@ const SearchBook = ({ books, updateShelf }) => {
 
     const [query, setQuery] = useState("");
     const [searchResult, setSearchResult] = useState([]);
- 
-     useEffect(() => {
 
+    
+     useEffect(() => {
+    // Search query function
     const timer = setTimeout( async () => {
+      //checks if query is not empty
         if(query.length !== '' && query.length > 0) {
             await BooksAPI.search(query.trim()).then(res => {
               if(!res.error) {
+                // Set Default shelf
                 res.forEach((searchedBook) => {
                   searchedBook.shelf = 'none'
                   books.map((book) => (  
-                    book.id !== searchedBook.id
+                    book.id === searchedBook.id
                     ?
-                    searchedBook.shelf = 'none'
-                    :
                     searchedBook.shelf = book.shelf                    
+                    :
+                    ''
                     ))
                   })
                   setSearchResult(res)
@@ -38,6 +41,7 @@ const SearchBook = ({ books, updateShelf }) => {
     }, 1000);
 
        return () => {
+            // clear timer when page refresh and when query changes
             clearTimeout(timer);
         } 
 
@@ -73,7 +77,7 @@ const SearchBook = ({ books, updateShelf }) => {
                 />             
               )) 
               :
-              <p>Start Searching</p>             
+              <p>Search for Books</p>             
         }
          
             </ol>

@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 
-const Book = ({ book, updateShelf, currentShelf }) => {
+const Book = ({ book, updateShelf }) => {
 
   //Handles updateShelf function
-  const handleShelfUpdate = (e) => {
-    e.preventDefault();
-    updateShelf(book, e.target.value)
+  const handleShelfUpdate = (event) => {
+    event.preventDefault();
+    updateShelf(book, event.target.value)
   }
 
   //Checks if image is available
@@ -25,7 +25,7 @@ const Book = ({ book, updateShelf, currentShelf }) => {
         ></div>
         <div className="book-shelf-changer">
         <select onChange={handleShelfUpdate}
-          value={currentShelf}>
+          value={book.shelf}>
           <option value="change" disabled>
             Move to...
           </option>
@@ -52,7 +52,6 @@ const Book = ({ book, updateShelf, currentShelf }) => {
 Book.propTypes = {
   book: PropTypes.object.isRequired,
   updateShelf: PropTypes.func,
-  currentShelf: PropTypes.string,
 }
 
 export default Book
